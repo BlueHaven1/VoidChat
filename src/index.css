@@ -1,0 +1,113 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-void-bg: #050508;
+  --color-void-panel: #0e0e12;
+  --color-void-element: #1d1d26;
+  --color-void-accent: #7c3aed;
+  --color-void-accent-hover: #6d28d9;
+  --color-void-text: #e4e4e7;
+  --color-void-text-muted: #a1a1aa;
+
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  
+  --animate-popup: popup 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-popout: popout 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  
+  @keyframes popup {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes popout {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-void-bg text-void-text antialiased;
+    background-image: radial-gradient(circle at top center, #2e1065 0%, #050508 50%);
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-[#0e0e12]/60 backdrop-blur-2xl border border-white/5 shadow-2xl;
+  }
+  
+  .glass-input {
+    @apply bg-black/20 backdrop-blur-md border border-white/5 focus-within:bg-black/40 focus-within:border-void-accent/50 transition-all duration-300;
+  }
+
+  .sidebar-gradient {
+    @apply bg-gradient-to-b from-[#141419]/90 to-void-bg/90 backdrop-blur-md;
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  @keyframes zoomIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  @keyframes zoomOut {
+    from { transform: scale(1); opacity: 1; }
+    to { transform: scale(0.95); opacity: 0; }
+  }
+  
+  .animate-in.fade-in {
+    animation: fadeIn 0.2s ease-out forwards;
+  }
+  .animate-out.fade-out {
+    animation: fadeOut 0.2s ease-in forwards;
+  }
+  .animate-in.zoom-in-95 {
+    animation: zoomIn 0.2s ease-out forwards;
+  }
+  .animate-out.zoom-out-95 {
+    animation: zoomOut 0.2s ease-in forwards;
+  }
+}

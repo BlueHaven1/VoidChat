@@ -1,4 +1,4 @@
-# Firebase Realtime Database Rules
+# Firebase Realtime Database Rules Test
 
 To fix the "Permission denied" error, you need to update your database rules in the Firebase Console.
 
